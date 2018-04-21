@@ -33,7 +33,11 @@ app.post('/wiadomosci', (req, resp) => {
 });
 
 app.get('/wyczysc', (req, resp) => {
-    fs.writeFileSync('./mojewiadomosci.json', '');
+    try {
+        fs.writeFileSync('./mojewiadomosci.json', '');
+    } catch (e) {
+        app.result = [];
+    }
 
     resp.redirect('/');
 });
